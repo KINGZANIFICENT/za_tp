@@ -1,9 +1,5 @@
--- main.lua
--- Ensure that config.lua is loaded via your resource manifest (fxmanifest.lua or __resource.lua)
-
 Citizen.CreateThread(function()
     for index, location in ipairs(Config.TeleportLocations) do
-        -- Create a zone at the entrance to teleport to the exit
         exports['qb-target']:AddCircleZone("teleport_entrance_" .. index, location.entrance.coords, 1.5, {
             name = "teleport_entrance_" .. index,
             debugPoly = false,
@@ -24,7 +20,7 @@ Citizen.CreateThread(function()
             distance = 2.5
         })
 
-        -- Create a zone at the exit to teleport back to the entrance
+
         exports['qb-target']:AddCircleZone("teleport_exit_" .. index, location.exit.coords, 1.5, {
             name = "teleport_exit_" .. index,
             debugPoly = false,
@@ -47,7 +43,7 @@ Citizen.CreateThread(function()
     end
 end)
 
--- Event to handle teleportation
+
 RegisterNetEvent('teleport:client:handleTeleport', function(data)
     if data and data.teleportData and data.teleportData.destination then
         local destination = data.teleportData.destination
